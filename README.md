@@ -7,3 +7,4 @@ ZennのPublicationに投稿された記事のタイトル、リンク、著者�
 - [ ] 著者をNotionのユーザーと紐付ける
 - [ ] ZennのタグとNotionのタグを紐付ける
 
+test
