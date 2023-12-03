@@ -12,9 +12,9 @@ ZennのPublicationに投稿された記事のタイトル、リンク、著者�
 
 # Demo
 
-[MidraLab HP](https://midra-lab.notion.site/MidraLab-dd08b86fba4e4041a14e09a1d36f36ae)にて以下のような画像のように取得したデータを反映させています。
+[MidraLab HP](https://midra-lab.notion.site/7ab2d6ad6b5e4c6487220ac360e6d8ec?v=340f109e5ced4ae99afad0f0ea4c8c62)にて以下のような画像のように取得したデータを反映させています。
 
-![](Docs/img.png)
+![](Docs/Demo.png)
 
 # セットアップ
 1. NotionAPIのトークンおよび反映させたいNotion DBのIdを取得する
