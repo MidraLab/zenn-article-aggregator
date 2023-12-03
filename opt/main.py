@@ -12,7 +12,7 @@ async def main():
 
     notion_api_key = os.environ["MIDRA_LAB_NOTION_API"]
     notion_database_id = os.environ["NOTION_DATABASE_ID"]
-    print("notion_api_key: ", notion_api_key, ",notion_database_id: ", notion_database_id)
+    print(f"{notion_api_key}, {notion_database_id}")
     # TODO: 使用者によって変更する
     usernames = ["keisuke114", "ayousanz"]
 
