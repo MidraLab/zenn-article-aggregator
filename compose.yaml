@@ -5,6 +5,9 @@ services:
     build: .
     container_name: 'zenn-article-aggregator'
     working_dir: '/root/'
+    environment:
+      - MIDRA_LAB_NOTION_API_KEY=${MIDRA_LAB_NOTION_API_KEY}
+      - NOTION_DATABASE_ID=${NOTION_DATABASE_ID}
     tty: true
     env_file:
       - opt/.env

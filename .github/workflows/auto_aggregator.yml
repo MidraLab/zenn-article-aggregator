@@ -20,10 +20,7 @@ jobs:
         run: |
           touch opt/.env
           echo "MIDRA_LAB_NOTION_API=${MIDRA_LAB_NOTION_API}" >> opt/.env
-          echo "NOTION_DATABASE_URL=${NOTION_DATABASE_URL}" >> opt/.env
+          echo "NOTION_DATABASE_ID=${NOTION_DATABASE_ID}" >> opt/.env
       - name: Build and run Docker Compose
         run: |
           docker-compose up -d --build
-      - name: Action run python
-        run: |
-          docker compose exec zenn-article-aggregator python opt/main.py
