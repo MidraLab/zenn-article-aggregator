@@ -1,39 +1,48 @@
-from bs4 import BeautifulSoup
+import requests
 from datetime import datetime
 
 
 class ZennScraper:
     def __init__(self, url):
+        """
+        ZennScraperクラスのコンストラクタ。
+        指定したURLを初期化し、空の記事リストを作成する。
+
+        Args:
+            url (str): スクレイピングするZennのURL。
+        """
         self.url = url
         self.articles = []
 
-    def get_articles(self, driver):
-        driver.get(self.url)
+    def get_midra_lab_articles(self, usernames):
+        base_url = "https://zenn.dev/api/articles"
 
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
-        articles = soup.find_all('article', class_='ArticleCard_container__3qUYt')
+        for username in usernames:
+            response = requests.get(base_url, params={'username': username, 'order': 'latest'})
+            if response.status_code == 200:
+                data = response.json()
+                for article in data["articles"]:
+                    # 'publication'が存在し、その'name'が'midra_lab'であるか確認
+                    if article.get("publication") and article["publication"].get("name") == "midra_lab":
 
-        for article in articles:
-            title = article.find('h3', class_='ArticleCard_title__UnBHE').text
-            url = "https://zenn.dev" + article.find('a', class_='ArticleCard_mainLink__X2TOE')['href']
-            name = article.find('div', class_='ArticleCard_userName__1q_wZ').text
-            self.articles.append({'title': title, 'url': url, 'name': name})
+                        # 日付の解析とフォーマット
+                        published_at = article.get("published_at")
+                        if published_at:
+                            date_obj = datetime.strptime(published_at, '%Y-%m-%dT%H:%M:%S.%f%z')
+                            formatted_date = date_obj.strftime('%Y-%m-%d')
+                        article_info = {
+                            'title': article["title"],
+                            'name': article["user"]["username"],
+                            'url': f"https://zenn.dev{article['path']}",
+                            'created_at': formatted_date
+                        }
+                        self.articles.append(article_info)
 
     def is_articles_empty(self):
+        """
+        記事リストが空かどうかを確認する。
+
+        Returns:
+            bool: リストが空の場合はTrue、それ以外の場合はFalse。
+        """
         return len(self.articles) == 0
-
-    def get_article_details(self, driver, article):
-        driver.get(article['url'])
-
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
-        date = soup.find('span', class_='ArticleHeader_num__rSDj6').text
-        date_obj = datetime.strptime(date, '%Y/%m/%d')
-        formatted_date = date_obj.strftime('%Y-%m-%d')
-        tags_container = soup.find('div', class_='View_topics__OVMdM')
-        tags = tags_container.find_all('div', class_='View_topicName__rxKth')
-
-        results = []
-        for tag in tags:
-            results.append(tag.text)
-
-        return {"tags": results, "date": formatted_date}
