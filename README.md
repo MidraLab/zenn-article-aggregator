@@ -14,9 +14,9 @@ A tool to retrieve the titles, links, and authors of articles posted to Zenn's P
 
 # Demo
 
-The data acquired at [MidraLab HP](https://midra-lab.notion.site/MidraLab-dd08b86fba4e4041a14e09a1d36f36ae) is reflected in the following image.
+The data acquired at [MidraLab HP](https://midra-lab.notion.site/7ab2d6ad6b5e4c6487220ac360e6d8ec?v=340f109e5ced4ae99afad0f0ea4c8c62) is reflected in the following image.
 
-![](Docs/img.png)
+![](Docs/Demo.png)
 
 # Setup
 1. obtain the NotionAPI token and the Id of the Notion DB you wish to reflect
